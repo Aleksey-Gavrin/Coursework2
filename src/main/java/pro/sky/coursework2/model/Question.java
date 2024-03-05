@@ -6,12 +6,10 @@ public class Question {
 
     private final String question;
     private final String answer;
-    private int questionID;
 
     public Question(String question, String answer) {
         this.question = question;
         this.answer = answer;
-        this.questionID = 0;
     }
 
     public String getQuestion() {
@@ -22,16 +20,9 @@ public class Question {
         return answer;
     }
 
-    public int getQuestionID() {
-        return questionID;
-    }
-    public void setQuestionID(int questionID) {
-        this.questionID = questionID;
-    }
-
     @Override
     public String toString() {
-        return "Вопрос: " + question + "\n" + "Ответ: " + answer;
+        return "Вопрос: " + question + "<br>" + "Ответ: " + answer;
     }
 
     @Override

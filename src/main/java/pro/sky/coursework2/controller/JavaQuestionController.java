@@ -4,9 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pro.sky.coursework2.Coursework2Application;
 import pro.sky.coursework2.model.Question;
-import pro.sky.coursework2.service.JavaQuestionService;
+import pro.sky.coursework2.service.QuestionService;
 
 import java.util.Collection;
 
@@ -14,14 +13,15 @@ import java.util.Collection;
 @RequestMapping(path = "/exam")
 public class JavaQuestionController {
 
-    private final JavaQuestionService service = Coursework2Application.service;
+    private final QuestionService service;
 
-    public JavaQuestionController() {
+    public JavaQuestionController(QuestionService service) {
+        this.service = service;
     }
 
     @GetMapping
     public String showInfo() {
-        return "Программа для генерации списка вопросов по языку Java.<br>" +
+        return "Программа для хранения вопросов по языку Java.<br>" +
                 "Команды и параметры:<br>" +
                 "/java/add?question=...&answer=...<br>" +
                 "/java/find?question=...&answer=...<br>" +
@@ -50,6 +50,6 @@ public class JavaQuestionController {
 
     @GetMapping(path = "/java")
     public Collection<Question> getAll(){
-        return  service.getAll();
+        return  service.getAllQuestions();
     }
 }
