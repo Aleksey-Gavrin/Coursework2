@@ -1,5 +1,6 @@
 package pro.sky.coursework2.service;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import pro.sky.coursework2.exceptions.InvalidInputException;
 import pro.sky.coursework2.model.Question;
@@ -10,10 +11,13 @@ import java.util.Set;
 @Service
 public class ExaminerServiceImpl implements ExaminerService {
 
-    private final QuestionService service;
+    private final QuestionService javaService;
+    private final QuestionService mathService;
 
-    public ExaminerServiceImpl(QuestionService service) {
-        this.service = service;
+    public ExaminerServiceImpl(@Qualifier("javaQuestionService") QuestionService javaService,
+                               @Qualifier("mathQuestionService") QuestionService mathService) {
+        this.javaService = javaService;
+        this.mathService = mathService;
     }
 
     @Override
@@ -22,8 +26,15 @@ public class ExaminerServiceImpl implements ExaminerService {
             throw new InvalidInputException();
         }
         Set<Question> questionsSet = new HashSet<>();
-        while (questionsSet.size() < amount) {
-           questionsSet.add(service.getRandomQuestion());
+        if (amount == 1) {
+            questionsSet.add(javaService.getRandomQuestion());
+        } else {
+            while (questionsSet.size() < amount) {
+                questionsSet.add(javaService.getRandomQuestion());
+                if (questionsSet.size() < amount) {
+                    questionsSet.add(mathService.getRandomQuestion());
+                }
+            }
         }
         return questionsSet;
     }

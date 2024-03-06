@@ -17,14 +17,14 @@ public class ExamController {
         this.service = service;
     }
 
-    @GetMapping(path = "/exam/java/examiner")
+    @GetMapping(path = "/exam/examiner")
     public String showInfo() {
         return "Генерация случайного списка вопросов.<br>Введите через '/' желаемое количество вопросов в диапазоне " +
                 "от 1 до 10";
 
     }
 
-    @GetMapping(path = "/exam/java/examiner/{amount}")
+    @GetMapping(path = "/exam/examiner/{amount}")
     public Set<Question> getQuestions(@PathVariable int amount) {
        return service.getQuestions(amount);
     }
