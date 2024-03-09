@@ -8,6 +8,7 @@ import pro.sky.coursework2.exceptions.InvalidInputException;
 import pro.sky.coursework2.model.Question;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,9 +17,9 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class ExaminerServiceImplTests {
 
-    JavaQuestionService javaTestService = mock(JavaQuestionService.class);
-    MathQuestionService mathTestService = mock(MathQuestionService.class);
-    ExaminerServiceImpl testService = new ExaminerServiceImpl(javaTestService, mathTestService);
+    List<QuestionService> servicesMock = List.of(mock(JavaQuestionService.class),
+            mock(MathQuestionService.class));
+    ExaminerServiceImpl testService = new ExaminerServiceImpl(servicesMock);
     Set<Question> actualQuestionsSet = new HashSet<>();
     Question javaTestQuestion = new Question("JavaQ", "JavaA");
     Question mathTestQuestion = new Question("MathQ", "MathA");
@@ -26,8 +27,8 @@ public class ExaminerServiceImplTests {
     @BeforeEach
     void setUp() {
 
-        when(javaTestService.getRandomQuestion()).thenReturn(javaTestQuestion);
-        when(mathTestService.getRandomQuestion()).thenReturn(mathTestQuestion);
+        when(servicesMock.get(0).getRandomQuestion()).thenReturn(javaTestQuestion);
+        when(servicesMock.get(1).getRandomQuestion()).thenReturn(mathTestQuestion);
     }
 
     @Test

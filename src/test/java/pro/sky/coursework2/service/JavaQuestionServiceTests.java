@@ -38,7 +38,6 @@ class JavaQuestionServiceTests {
         testQuestionsList.add(new Question("TestQ9", "TestA9"));
 
         when(repositoryMock.getQuestionsList()).thenReturn(testQuestionsList);
-        when(repositoryMock.getMAX_QUESTIONS_QTY()).thenReturn(10);
     }
 
     @Test

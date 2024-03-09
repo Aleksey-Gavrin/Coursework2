@@ -24,7 +24,7 @@ public class JavaQuestionService implements QuestionService {
         if (javaRepository.getQuestionsList().contains(currentQuestion)) {
             throw new QuestionAlreadyAddedException();
         }
-        if (javaRepository.getQuestionsList().size() == javaRepository.getMAX_QUESTIONS_QTY()) {
+        if (javaRepository.getQuestionsList().size() == JavaQuestionsRepository.MAX_QUESTIONS_QTY) {
             throw new QuestionStorageIsFullException();
         }
         javaRepository.getQuestionsList().add(currentQuestion);
@@ -36,7 +36,7 @@ public class JavaQuestionService implements QuestionService {
         if (javaRepository.getQuestionsList().contains(question)) {
             throw new QuestionAlreadyAddedException();
         }
-        if (javaRepository.getQuestionsList().size() == javaRepository.getMAX_QUESTIONS_QTY()) {
+        if (javaRepository.getQuestionsList().size() == JavaQuestionsRepository.MAX_QUESTIONS_QTY) {
             throw new QuestionStorageIsFullException();
         }
         javaRepository.getQuestionsList().add(question);

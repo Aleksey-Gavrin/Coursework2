@@ -11,14 +11,11 @@ import java.util.List;
 public class JavaQuestionsRepository {
 
     private final List<Question> questionsList = new ArrayList<>();
-	private final int MAX_QUESTIONS_QTY = 10;
+	public static final int MAX_QUESTIONS_QTY = 10;
 
     public List<Question> getQuestionsList() {
         return questionsList;
     }
-	public int getMAX_QUESTIONS_QTY() {
-		return MAX_QUESTIONS_QTY;
-	}
 
     @PostConstruct
     public void init() {
